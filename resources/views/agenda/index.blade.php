@@ -26,8 +26,17 @@
                         <p class="text-xs text-gray-500">{{ $agenda->deskripsi }}</p>
                     </div>
                     <div class="shrink-0 text-right text-sm">
-                        <p>{{ $agenda->tanggal->isoFormat('D MMM Y') }}</p>
-                        <span class="rounded-full bg-blue-50 px-2 py-0.5 text-xs text-blue-700">{{ $agenda->jenis }}</span>
+                        @if ($agenda->waktuMulai()->isPast())
+                            <span class="mb-1 inline-block rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-700">
+                                Selesai
+                            </span>
+                        @else
+                            <span class="mb-1 inline-block rounded-full bg-blue-50 px-2 py-0.5 text-xs font-medium text-blue-700">
+                                Akan datang
+                            </span>
+                        @endif
+                        <p>{{ $agenda->tanggal->isoFormat('D MMM Y') }}{{ $agenda->waktu ? ' · '.$agenda->waktu : '' }}</p>
+                        <span class="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-600">{{ $agenda->jenis }}</span>
                     </div>
                 </a>
             @endforeach

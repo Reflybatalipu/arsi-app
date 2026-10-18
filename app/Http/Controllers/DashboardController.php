@@ -42,11 +42,15 @@ class DashboardController extends Controller
         $items = $this->urutkanRekomendasi($tugasItems->concat($agendaItems));
 
         $notifikasi = $items
-            ->filter(fn (ActivityItem $item) => $item->perluPengingatTugas() || $item->perluPengingatAgenda())
+            ->filter(fn (ActivityItem $item) => $item->perluPengingatTugas()
+                || $item->perluPengingatAgenda()
+                || $item->perluPengingatSelesaiAgenda())
             ->values();
 
         $rekomendasi = $items
-            ->filter(fn (ActivityItem $item) => $item->isTugas() ? (! $item->selesai && $item->deadline !== null) : true)
+            ->filter(fn (ActivityItem $item) => $item->isTugas()
+                ? (! $item->selesai && $item->deadline !== null)
+                : ! $item->selesaiOtomatis())
             ->take(5)
             ->values();
 
