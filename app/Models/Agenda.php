@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\CarbonInterface;
 use Database\Factories\AgendaFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -34,5 +35,15 @@ class Agenda extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Waktu pelaksanaan efektif: tanggal + jam (default akhir hari).
+     */
+    public function waktuMulai(): CarbonInterface
+    {
+        $waktu = $this->waktu ?: '23:59:59';
+
+        return $this->tanggal->copy()->setTimeFromTimeString($waktu);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\CarbonInterface;
 use Database\Factories\TugasFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -50,5 +51,13 @@ class Tugas extends Model
     public function isTenggatLewat(): bool
     {
         return $this->tenggat !== null && $this->tenggat->isPast();
+    }
+
+    /**
+     * Waktu batas efektif: akhir hari dari tanggal tenggat (23:59:59).
+     */
+    public function deadlineAt(): ?CarbonInterface
+    {
+        return $this->tenggat?->copy()->endOfDay();
     }
 }
