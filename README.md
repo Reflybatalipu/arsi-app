@@ -1,3 +1,7 @@
+<img width="1367" height="1482" alt="Beranda" src="https://github.com/user-attachments/assets/667be029-7575-4833-ac6f-9d9448b5b37c" />
+<img width="1367" height="643" alt="Tampilan Daftar UI (Keting)" src="https://github.com/user-attachments/assets/cddce229-6603-4751-a6d1-56a98fca0fb0" />
+<img width="1367" height="645" alt="Detail Tugas" src="https://github.com/user-attachments/assets/140d96a4-ee99-4451-8f31-ac8e4b11fc0a" />
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
