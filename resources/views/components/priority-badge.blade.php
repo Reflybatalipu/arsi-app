@@ -4,11 +4,18 @@
     $warna = match ($priority->value) {
         'kritis' => 'bg-red-100 text-red-700',
         'tinggi' => 'bg-orange-100 text-orange-700',
-        'sedang' => 'bg-yellow-100 text-yellow-700',
-        default => 'bg-green-100 text-green-700',
+        'sedang' => 'bg-amber-100 text-amber-700',
+        default => 'bg-emerald-100 text-emerald-700',
+    };
+
+    $ikon = match ($priority->value) {
+        'kritis' => 'circle-exclamation',
+        'tinggi' => 'bolt',
+        'sedang' => 'gauge-high',
+        default => 'leaf',
     };
 @endphp
 
-<span {{ $attributes->merge(['class' => "rounded px-2 py-0.5 text-[11px] font-semibold {$warna}"]) }}>
-    Prioritas {{ $priority->label() }}
+<span {{ $attributes->merge(['class' => "inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[11px] font-semibold {$warna}"]) }}>
+    <x-fa :name="$ikon" />Prioritas {{ $priority->label() }}
 </span>

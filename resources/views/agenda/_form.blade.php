@@ -4,15 +4,14 @@
 --}}
 <div class="space-y-4">
     <div>
-        <label for="judul" class="mb-1 block text-sm">Judul Agenda</label>
+        <label for="judul" class="label"><x-fa name="font" class="text-gray-400" />Judul Agenda</label>
         <input type="text" name="judul" id="judul" value="{{ old('judul', $agenda->judul ?? '') }}" required
-               class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">
+               class="input">
     </div>
 
     <div>
-        <label for="jenis" class="mb-1 block text-sm">Jenis</label>
-        <select name="jenis" id="jenis" required
-                class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">
+        <label for="jenis" class="label"><x-fa name="tag" class="text-gray-400" />Jenis</label>
+        <select name="jenis" id="jenis" required class="input cursor-pointer">
             @foreach (['organisasi' => 'Kegiatan Organisasi', 'rencana' => 'Rencana', 'lainnya' => 'Lainnya'] as $value => $label)
                 <option value="{{ $value }}" @selected(old('jenis', $agenda->jenis ?? 'lainnya') === $value)>{{ $label }}</option>
             @endforeach
@@ -21,20 +20,20 @@
 
     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
-            <label for="tanggal" class="mb-1 block text-sm">Tanggal</label>
-            <input type="date" name="tanggal" id="tanggal" value="{{ old('tanggal', isset($agenda) && $agenda->tanggal ? $agenda->tanggal->format('Y-m-d') : '') }}" required
-                   class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">
+            <label for="tanggal" class="label"><x-fa name="calendar-days" class="text-gray-400" />Tanggal</label>
+            <input type="date" name="tanggal" id="tanggal"
+                   value="{{ old('tanggal', isset($agenda) && $agenda->tanggal ? $agenda->tanggal->format('Y-m-d') : '') }}" required
+                   class="input">
         </div>
         <div>
-            <label for="waktu" class="mb-1 block text-sm">Waktu (opsional)</label>
+            <label for="waktu" class="label"><x-fa name="clock" class="text-gray-400" />Waktu (opsional)</label>
             <input type="time" name="waktu" id="waktu" value="{{ old('waktu', $agenda->waktu ?? '') }}"
-                   class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">
+                   class="input">
         </div>
     </div>
 
     <div>
-        <label for="deskripsi" class="mb-1 block text-sm">Deskripsi</label>
-        <textarea name="deskripsi" id="deskripsi" rows="4"
-                  class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">{{ old('deskripsi', $agenda->deskripsi ?? '') }}</textarea>
+        <label for="deskripsi" class="label"><x-fa name="align-left" class="text-gray-400" />Deskripsi</label>
+        <textarea name="deskripsi" id="deskripsi" rows="4" class="input">{{ old('deskripsi', $agenda->deskripsi ?? '') }}</textarea>
     </div>
 </div>

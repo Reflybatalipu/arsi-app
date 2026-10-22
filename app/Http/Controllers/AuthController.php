@@ -30,7 +30,9 @@ class AuthController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->route('dashboard')->with('success', 'Registrasi berhasil.');
+        return redirect()->route('dashboard')
+            ->with('success', 'Registrasi berhasil.')
+            ->with('popup_peringatan', true);
     }
 
     /**
@@ -56,7 +58,9 @@ class AuthController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard'));
+        // Popup ringkasan prioritas hanya muncul saat baru masuk.
+        return redirect()->intended(route('dashboard'))
+            ->with('popup_peringatan', true);
     }
 
     /**

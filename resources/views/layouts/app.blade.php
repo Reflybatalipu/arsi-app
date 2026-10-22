@@ -6,25 +6,38 @@
     <title>@yield('title', 'Manajemen Tugas')</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="min-h-screen bg-gray-100 text-gray-900">
-    <nav class="sticky top-0 z-30 border-b border-gray-200 bg-white/95 backdrop-blur">
+<body class="min-h-screen bg-mica">
+    <nav class="sticky top-0 z-30 border-b border-stroke bg-white/80 backdrop-blur-xl">
         <div class="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-x-4 gap-y-2 px-4 py-3 sm:gap-x-6 sm:px-6 sm:py-4 lg:px-8">
-            <div class="flex items-center gap-4 sm:gap-6">
-                <a href="{{ route('dashboard') }}" class="font-semibold text-blue-600">Manajemen Tugas</a>
-                <a href="{{ route('dashboard') }}" class="text-sm hover:text-blue-600">Beranda</a>
-                <a href="{{ route('tugas.index') }}" class="text-sm hover:text-blue-600">Tugas</a>
-                <a href="{{ route('agenda.index') }}" class="text-sm hover:text-blue-600">Agenda</a>
+            <div class="flex items-center gap-1 sm:gap-2">
+                <a href="{{ route('dashboard') }}" class="mr-2 flex items-center gap-2 rounded-md px-1.5 py-1 font-semibold text-accent">
+                    <x-fa name="clipboard-check" /> Manajemen Tugas
+                </a>
+                <a href="{{ route('dashboard') }}" class="flex items-center gap-2 rounded-md px-2.5 py-1.5 text-sm text-gray-700 transition hover:bg-black/5">
+                    <x-fa name="house" /> Beranda
+                </a>
+                <a href="{{ route('tugas.index') }}" class="flex items-center gap-2 rounded-md px-2.5 py-1.5 text-sm text-gray-700 transition hover:bg-black/5">
+                    <x-fa name="list-check" /> Tugas
+                </a>
+                <a href="{{ route('agenda.index') }}" class="flex items-center gap-2 rounded-md px-2.5 py-1.5 text-sm text-gray-700 transition hover:bg-black/5">
+                    <x-fa name="calendar-days" /> Agenda
+                </a>
             </div>
 
             @auth
                 <div class="flex items-center gap-3">
-                    <span class="hidden text-sm sm:inline">{{ auth()->user()->name }}</span>
-                    <span class="rounded-full bg-blue-100 px-2 py-0.5 text-xs font-medium text-blue-700">
-                        {{ auth()->user()->role->label() }}
+                    <span class="hidden items-center gap-2 text-sm sm:flex">
+                        <x-fa name="circle-user" class="text-lg text-gray-400" />
+                        {{ auth()->user()->name }}
+                    </span>
+                    <span class="rounded-md bg-accent-soft px-2 py-0.5 text-xs font-medium text-accent">
+                        <x-fa name="shield-halved" class="mr-1" />{{ auth()->user()->role->label() }}
                     </span>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <button type="submit" class="text-sm text-red-600 hover:underline">Keluar</button>
+                        <button type="submit" class="btn btn-danger btn-sm">
+                            <x-fa name="arrow-right-from-bracket" /> Keluar
+                        </button>
                     </form>
                 </div>
             @endauth
@@ -33,13 +46,17 @@
 
     <main class="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
         @if (session('success'))
-            <div class="mb-4 rounded-md bg-green-50 border border-green-200 px-4 py-3 text-sm text-green-700">
+            <div class="mb-4 flex items-center gap-3 rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800">
+                <x-fa name="circle-check" class="text-emerald-600" />
                 {{ session('success') }}
             </div>
         @endif
 
         @if ($errors->any())
-            <div class="mb-4 rounded-md bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700">
+            <div class="mb-4 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                <p class="mb-1 flex items-center gap-2 font-medium">
+                    <x-fa name="triangle-exclamation" class="text-red-600" /> Ada yang perlu diperbaiki:
+                </p>
                 <ul class="list-inside list-disc">
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>

@@ -1,12 +1,14 @@
 @props(['type'])
 
 @php
-    $label = $type === \App\Support\ActivityItem::TYPE_TUGAS ? 'Tugas' : 'Agenda';
-    $warna = $type === \App\Support\ActivityItem::TYPE_TUGAS
-        ? 'bg-blue-100 text-blue-700'
-        : 'bg-indigo-100 text-indigo-700';
+    $tugas = $type === \App\Support\ActivityItem::TYPE_TUGAS;
+    $label = $tugas ? 'Tugas' : 'Agenda';
+    $warna = $tugas
+        ? 'bg-accent-soft text-accent'
+        : 'bg-indigo-500/10 text-indigo-600';
+    $ikon = $tugas ? 'list-check' : 'calendar-days';
 @endphp
 
-<span {{ $attributes->merge(['class' => "rounded px-2 py-0.5 text-[11px] font-medium {$warna}"]) }}>
-    {{ $label }}
+<span {{ $attributes->merge(['class' => "inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[11px] font-medium {$warna}"]) }}>
+    <x-fa :name="$ikon" />{{ $label }}
 </span>

@@ -5,12 +5,15 @@
 @section('content')
     <div class="mx-auto max-w-2xl">
         <div class="mb-4 flex flex-wrap items-center justify-between gap-3">
-            <h1 class="text-xl font-semibold">{{ $tugas->judul }}</h1>
+            <h1 class="flex items-center gap-2 text-xl font-semibold">
+                <x-fa name="list-check" class="text-accent" />{{ $tugas->judul }}
+            </h1>
 
             <div class="flex gap-2">
                 @can('update', $tugas)
-                    <a href="{{ route('tugas.edit', $tugas) }}"
-                       class="rounded-md border border-gray-300 px-3 py-1.5 text-sm hover:bg-gray-50">Ubah</a>
+                    <a href="{{ route('tugas.edit', $tugas) }}" class="btn btn-secondary btn-sm">
+                        <x-fa name="pen" /> Ubah
+                    </a>
                 @endcan
 
                 @can('delete', $tugas)
@@ -18,37 +21,37 @@
                           onsubmit="return confirm('Hapus tugas ini?')">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="rounded-md border border-red-300 px-3 py-1.5 text-sm text-red-600 hover:bg-red-50">
-                            Hapus
+                        <button type="submit" class="btn btn-danger btn-sm">
+                            <x-fa name="trash" /> Hapus
                         </button>
                     </form>
                 @endcan
             </div>
         </div>
 
-        <div class="rounded-lg bg-white p-6 shadow">
+        <div class="card p-6">
             <dl class="space-y-3 text-sm">
                 <div class="flex gap-3">
-                    <dt class="w-32 shrink-0 text-gray-500">Mata Kuliah</dt>
+                    <dt class="dt-label"><x-fa name="graduation-cap" class="text-gray-400" />Mata Kuliah</dt>
                     <dd>{{ $tugas->mata_kuliah ?? '-' }}</dd>
                 </div>
                 <div class="flex gap-3">
-                    <dt class="w-32 shrink-0 text-gray-500">Dosen</dt>
+                    <dt class="dt-label"><x-fa name="user-tie" class="text-gray-400" />Dosen</dt>
                     <dd>{{ $tugas->dosen ?? '-' }}</dd>
                 </div>
                 <div class="flex gap-3">
-                    <dt class="w-32 shrink-0 text-gray-500">Tenggat</dt>
+                    <dt class="dt-label"><x-fa name="calendar-days" class="text-gray-400" />Tenggat</dt>
                     <dd class="{{ $tugas->isTenggatLewat() ? 'text-red-600' : '' }}">
                         {{ $tugas->tenggat?->isoFormat('D MMM Y') ?? 'Tanpa tenggat' }}
                     </dd>
                 </div>
                 <div class="flex gap-3">
-                    <dt class="w-32 shrink-0 text-gray-500">Diinput oleh</dt>
+                    <dt class="dt-label"><x-fa name="user-pen" class="text-gray-400" />Diinput oleh</dt>
                     <dd>{{ $tugas->user->name }}</dd>
                 </div>
                 @if ($tugas->deskripsi)
                     <div class="flex gap-3">
-                        <dt class="w-32 shrink-0 text-gray-500">Deskripsi</dt>
+                        <dt class="dt-label"><x-fa name="align-left" class="text-gray-400" />Deskripsi</dt>
                         <dd class="whitespace-pre-line">{!! nl2br(e($tugas->deskripsi)) !!}</dd>
                     </div>
                 @endif
@@ -58,8 +61,8 @@
             <div class="mt-6 border-t border-gray-100 pt-4">
                 <form method="POST" action="{{ route('tugas.selesai', $tugas) }}">
                     @csrf
-                    <button type="submit"
-                            class="rounded-md px-4 py-2 text-sm font-medium {{ $sudahSelesai ? 'border border-gray-300 text-gray-600 hover:bg-gray-50' : 'bg-green-600 text-white hover:bg-green-700' }}">
+                    <button type="submit" class="btn {{ $sudahSelesai ? 'btn-secondary' : 'btn-success' }}">
+                        <x-fa name="{{ $sudahSelesai ? 'rotate-left' : 'circle-check' }}" />
                         {{ $sudahSelesai ? 'Batalkan Status Selesai' : 'Tandai Selesai' }}
                     </button>
                 </form>
@@ -67,17 +70,17 @@
 
             {{-- Progres mahasiswa --}}
             <div class="mt-6 border-t border-gray-100 pt-4">
-                <h2 class="mb-2 text-sm font-semibold">
-                    Diselesaikan {{ $tugas->diselesaikan_oleh_count }} mahasiswa
+                <h2 class="mb-2 flex items-center gap-2 text-sm font-semibold">
+                    <x-fa name="users" class="text-gray-400" />Diselesaikan {{ $tugas->diselesaikan_oleh_count }} mahasiswa
                 </h2>
 
                 @if ($penyelesai->isEmpty())
-                    <p class="text-sm text-gray-500">Belum ada yang menyelesaikan.</p>
+                    <p class="text-sm text-gray-500"><x-fa name="inbox" class="mr-1 text-gray-400" />Belum ada yang menyelesaikan.</p>
                 @else
                     <ul class="flex flex-wrap gap-2">
                         @foreach ($penyelesai as $mahasiswa)
-                            <li class="rounded-full bg-green-50 px-2 py-0.5 text-xs text-green-700">
-                                {{ $mahasiswa->name }}
+                            <li class="inline-flex items-center gap-1 rounded-md bg-emerald-50 px-2 py-0.5 text-xs text-emerald-700">
+                                <x-fa name="user-graduate" />{{ $mahasiswa->name }}
                             </li>
                         @endforeach
                     </ul>

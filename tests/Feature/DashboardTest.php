@@ -274,3 +274,58 @@ test('rekomendasi pengerjaan diurutkan dari tenggat terdekat', function () {
         ->and($posJauh)->not->toBeFalse()
         ->and($posDekat)->toBeLessThan($posJauh);
 });
+
+test('agenda yang baru lewat waktu tidak menampilkan label telat', function () {
+    $user = User::factory()->roleMahasiswa()->create();
+
+    Agenda::factory()->create([
+        'user_id' => $user->id,
+        'judul' => 'Agenda Baru Lewat',
+        'tanggal' => now()->subHours(3)->format('Y-m-d'),
+        'waktu' => now()->subHours(3)->format('H:i'),
+    ]);
+
+    $this->actingAs($user)
+        ->get(route('dashboard'))
+        ->assertOk()
+        ->assertDontSee('Telat 3 jam')
+        ->assertSee('Sudah selesai');
+});
+
+test('agenda yang lewat waktu tidak disematkan di rekomendasi pengerjaan', function () {
+    $user = User::factory()->roleMahasiswa()->create();
+
+    Agenda::factory()->create([
+        'user_id' => $user->id,
+        'judul' => 'Agenda Lewat Tak Direkomendasikan',
+        'tanggal' => now()->subHours(2)->format('Y-m-d'),
+        'waktu' => now()->subHours(2)->format('H:i'),
+    ]);
+
+    $html = $this->actingAs($user)->get(route('dashboard'))->assertOk()->getContent();
+
+    $mulai = strpos($html, 'Rekomendasi Pengerjaan');
+    $akhir = strpos($html, 'id="search"');
+    $rekomendasi = substr($html, $mulai, $akhir - $mulai);
+
+    expect($rekomendasi)->not->toContain('Agenda Lewat Tak Direkomendasikan');
+});
+
+test('popup ringkasan prioritas tampil setelah login dan hilang saat dikunjungi lagi', function () {
+    $user = User::factory()->roleMahasiswa()->create();
+
+    $this->post(route('login.attempt'), [
+        'email' => $user->email,
+        'password' => 'password',
+    ])->assertRedirect(route('dashboard'));
+
+    $this->get(route('dashboard'))
+        ->assertOk()
+        ->assertSee('id="popup-peringatan"', false)
+        ->assertSee('Ringkasan Prioritas');
+
+    // Kunjungan berikutnya: popup tidak muncul lagi.
+    $this->get(route('dashboard'))
+        ->assertOk()
+        ->assertDontSee('id="popup-peringatan"', false);
+});

@@ -170,6 +170,8 @@ final class ActivityItem
 
     /**
      * Sisa waktu dalam format ramah ("3 jam lagi", "2 hari", "Telat 1 hari").
+     * Agenda tidak pernah menampilkan label "telat" — begitu waktu
+     * pelaksanaan terlampaui, ia dianggap selesai.
      */
     public function sisaWaktu(): string
     {
@@ -177,6 +179,10 @@ final class ActivityItem
 
         if ($sisa === null) {
             return 'Tanpa tenggat';
+        }
+
+        if ($sisa < 0 && ! $this->isTugas()) {
+            return 'Sudah selesai';
         }
 
         $telat = $sisa < 0;

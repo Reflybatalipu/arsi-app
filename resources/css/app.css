@@ -5,6 +5,78 @@
 @source '../../storage/framework/views/*.php';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-sans: 'Segoe UI Variable Text', 'Segoe UI', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+        'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+    /* Palet Fluent / Windows 11 (tema terang). */
+    --color-accent: #0067c0;
+    --color-accent-dark: #005ba1;
+    --color-accent-soft: #e8f1fb;
+    --color-mica: #f3f3f3;
+    --color-cardline: rgba(0, 0, 0, 0.0578);
+    --color-stroke: rgba(0, 0, 0, 0.1);
+}
+
+@layer base {
+    body {
+        @apply bg-mica text-[#1a1a1a] antialiased;
+    }
+
+    ::selection {
+        @apply bg-accent/20;
+    }
+}
+
+@layer components {
+    .btn {
+        @apply inline-flex cursor-pointer items-center justify-center gap-2 rounded-md border px-3.5 py-2 text-sm font-medium shadow-sm transition select-none active:scale-[.98];
+    }
+
+    .btn-primary {
+        @apply border-accent-dark bg-accent text-white hover:bg-accent-dark;
+    }
+
+    .btn-secondary {
+        @apply border-stroke bg-white text-gray-900 hover:bg-gray-50 active:bg-gray-100;
+    }
+
+    .btn-success {
+        @apply border-[#0b6a3d] bg-[#107c41] text-white hover:bg-[#0e6c38];
+    }
+
+    .btn-danger {
+        @apply border-red-200 bg-white text-red-600 hover:bg-red-50;
+    }
+
+    .btn-sm {
+        @apply px-3 py-1.5 text-xs;
+    }
+
+    .input {
+        @apply w-full rounded-md border border-[#8a8a8a] bg-white px-3 py-2 text-sm shadow-[0_1px_1px_rgba(0,0,0,0.03)] outline-none transition focus:border-accent focus:ring-1 focus:ring-accent;
+    }
+
+    .label {
+        @apply mb-1 flex items-center gap-1.5 text-sm font-medium text-gray-700;
+    }
+
+    .card {
+        @apply rounded-lg border border-cardline bg-white shadow-[0_1px_2px_rgba(0,0,0,0.06)];
+    }
+
+    .chip {
+        @apply inline-flex cursor-pointer items-center gap-1.5 rounded-md border border-stroke bg-white px-3 py-1.5 text-xs font-medium text-gray-700 transition hover:bg-gray-50;
+    }
+
+    .chip-aktif {
+        @apply border-accent-dark bg-accent text-white hover:bg-accent-dark hover:text-white;
+    }
+
+    .panel-judul {
+        @apply flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-gray-500;
+    }
+
+    .dt-label {
+        @apply flex w-36 shrink-0 items-center gap-2 text-sm text-gray-500;
+    }
 }

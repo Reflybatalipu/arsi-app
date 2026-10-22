@@ -8,7 +8,7 @@
     // Tugas lewat (merah), agenda selesai otomatis (hijau), sisanya perhatian (kuning).
     [$tema, $ikon] = match (true) {
         $lewatTugas => ['border-red-200 bg-red-50 text-red-800', 'triangle-exclamation'],
-        $agendaSelesai => ['border-green-200 bg-green-50 text-green-800', 'circle-check'],
+        $agendaSelesai => ['border-emerald-200 bg-emerald-50 text-emerald-800', 'circle-check'],
         $item->isTugas() => ['border-amber-200 bg-amber-50 text-amber-800', 'clock'],
         default => ['border-amber-200 bg-amber-50 text-amber-800', 'calendar-day'],
     };
@@ -29,11 +29,11 @@
     $batasTautan = $lewatTugas
         ? 'border-red-300 text-red-700 hover:bg-red-100'
         : ($agendaSelesai
-            ? 'border-green-300 text-green-700 hover:bg-green-100'
+            ? 'border-emerald-300 text-emerald-700 hover:bg-emerald-100'
             : 'border-amber-300 text-amber-700 hover:bg-amber-100');
 @endphp
 
-<div {{ $attributes->merge(['class' => "flex items-start gap-3 rounded-xl border px-4 py-3 shadow-sm {$tema}"]) }}>
+<div {{ $attributes->merge(['class' => "flex items-start gap-3 rounded-lg border px-4 py-3 shadow-sm {$tema}"]) }}>
     <x-fa :name="$ikon" class="mt-1" />
 
     <div class="min-w-0 flex-1">
@@ -51,7 +51,7 @@
     </div>
 
     <a href="{{ $tautan }}"
-       class="shrink-0 rounded-lg border bg-white px-3 py-1.5 text-xs font-medium {{ $batasTautan }}">
-        {{ $labelTautan }}
+       class="inline-flex shrink-0 items-center gap-1.5 rounded-md border bg-white/70 px-3 py-1.5 text-xs font-medium {{ $batasTautan }}">
+        <x-fa name="arrow-up-right-from-square" />{{ $labelTautan }}
     </a>
 </div>
