@@ -7,10 +7,10 @@
 
     // Tugas lewat (merah), agenda selesai otomatis (hijau), sisanya perhatian (kuning).
     [$tema, $ikon] = match (true) {
-        $lewatTugas => ['border-red-200 bg-red-50 text-red-800', 'triangle-exclamation'],
-        $agendaSelesai => ['border-emerald-200 bg-emerald-50 text-emerald-800', 'circle-check'],
-        $item->isTugas() => ['border-amber-200 bg-amber-50 text-amber-800', 'clock'],
-        default => ['border-amber-200 bg-amber-50 text-amber-800', 'calendar-day'],
+        $lewatTugas => ['border-red-200 bg-red-50 text-red-800 dark:border-red-900 dark:bg-red-950/50 dark:text-red-200', 'triangle-exclamation'],
+        $agendaSelesai => ['border-emerald-200 bg-emerald-50 text-emerald-800 dark:border-emerald-900 dark:bg-emerald-950/50 dark:text-emerald-200', 'circle-check'],
+        $item->isTugas() => ['border-amber-200 bg-amber-50 text-amber-800 dark:border-amber-900 dark:bg-amber-950/50 dark:text-amber-200', 'clock'],
+        default => ['border-amber-200 bg-amber-50 text-amber-800 dark:border-amber-900 dark:bg-amber-950/50 dark:text-amber-200', 'calendar-day'],
     };
 
     $judulNotifikasi = match (true) {
@@ -27,10 +27,10 @@
     $labelTautan = $item->isTugas() ? 'Buka Tugas' : 'Buka Agenda';
 
     $batasTautan = $lewatTugas
-        ? 'border-red-300 text-red-700 hover:bg-red-100'
+        ? 'border-red-300 text-red-700 hover:bg-red-100 dark:border-red-800 dark:text-red-300 dark:hover:bg-red-900/50'
         : ($agendaSelesai
-            ? 'border-emerald-300 text-emerald-700 hover:bg-emerald-100'
-            : 'border-amber-300 text-amber-700 hover:bg-amber-100');
+            ? 'border-emerald-300 text-emerald-700 hover:bg-emerald-100 dark:border-emerald-800 dark:text-emerald-300 dark:hover:bg-emerald-900/50'
+            : 'border-amber-300 text-amber-700 hover:bg-amber-100 dark:border-amber-800 dark:text-amber-300 dark:hover:bg-amber-900/50');
 @endphp
 
 <div {{ $attributes->merge(['class' => "flex items-start gap-3 rounded-lg border px-4 py-3 shadow-sm {$tema}"]) }}>
@@ -51,7 +51,7 @@
     </div>
 
     <a href="{{ $tautan }}"
-       class="inline-flex shrink-0 items-center gap-1.5 rounded-md border bg-white/70 px-3 py-1.5 text-xs font-medium {{ $batasTautan }}">
+       class="inline-flex shrink-0 items-center gap-1.5 rounded-md border bg-surface/70 px-3 py-1.5 text-xs font-medium {{ $batasTautan }}">
         <x-fa name="arrow-up-right-from-square" />{{ $labelTautan }}
     </a>
 </div>

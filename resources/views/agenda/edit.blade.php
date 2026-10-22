@@ -12,7 +12,7 @@
                 @method('PUT')
                 @include('agenda._form')
 
-                <div class="flex gap-3 border-t border-gray-100 pt-4">
+                <div class="flex gap-3 border-t border-line pt-4">
                     <button type="submit" class="btn btn-primary">
                         <x-fa name="floppy-disk" /> Perbarui
                     </button>

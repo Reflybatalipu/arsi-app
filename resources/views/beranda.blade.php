@@ -11,34 +11,34 @@
          role="dialog" aria-modal="true" aria-labelledby="popup-judul">
         <div class="popup-panel card w-full max-w-md p-6 shadow-2xl">
             <div class="mb-4 flex items-start gap-3">
-                <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-amber-100 text-lg text-amber-700">
+                <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-amber-100 text-lg text-amber-700 dark:bg-amber-900/60 dark:text-amber-300">
                     <x-fa name="bell" />
                 </span>
                 <div class="min-w-0">
                     <h2 id="popup-judul" class="text-base font-semibold">Ringkasan Prioritas</h2>
-                    <p class="text-sm text-gray-500">Selamat datang kembali, {{ auth()->user()->name }}.</p>
+                    <p class="text-sm text-ink-3">Selamat datang kembali, {{ auth()->user()->name }}.</p>
                 </div>
             </div>
 
             @if ($notifikasi->isEmpty())
-                <div class="flex items-center gap-3 rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800">
-                    <x-fa name="circle-check" class="text-emerald-600" />
+                <div class="flex items-center gap-3 rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800 dark:border-emerald-900 dark:bg-emerald-950/60 dark:text-emerald-200">
+                    <x-fa name="circle-check" class="text-emerald-600 dark:text-emerald-400" />
                     Semua tugas dan agendamu masih aman. Kerja bagus!
                 </div>
             @else
                 <ul class="space-y-2 text-sm">
                     @foreach ($notifikasi->take(4) as $item)
-                        <li class="flex items-center justify-between gap-3 rounded-lg border border-gray-100 bg-gray-50 px-3 py-2">
+                        <li class="flex items-center justify-between gap-3 rounded-lg border border-line bg-surface-2 px-3 py-2">
                             <span class="flex min-w-0 items-center gap-2">
-                                <x-fa :name="$item->isTugas() ? 'list-check' : 'calendar-days'" class="text-gray-400" />
+                                <x-fa :name="$item->isTugas() ? 'list-check' : 'calendar-days'" class="text-ink-4" />
                                 <span class="min-w-0 flex-1 truncate font-medium">{{ $item->judul() }}</span>
                             </span>
-                            <span class="shrink-0 text-xs text-gray-500">{{ $item->sisaWaktu() }}</span>
+                            <span class="shrink-0 text-xs text-ink-3">{{ $item->sisaWaktu() }}</span>
                         </li>
                     @endforeach
                 </ul>
                 @if ($notifikasi->count() > 4)
-                    <p class="mt-2 text-xs text-gray-400">+ {{ $notifikasi->count() - 4 }} peringatan lainnya.</p>
+                    <p class="mt-2 text-xs text-ink-4">+ {{ $notifikasi->count() - 4 }} peringatan lainnya.</p>
                 @endif
             @endif
 
@@ -58,8 +58,8 @@
 <div class="mb-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
     <div>
         <h1 class="text-2xl font-bold tracking-tight">Halo, {{ auth()->user()->name }}</h1>
-        <p class="text-sm text-gray-500">
-            Kamu masuk sebagai <span class="font-medium text-gray-700">{{ auth()->user()->role->label() }}</span>.
+        <p class="text-sm text-ink-3">
+            Kamu masuk sebagai <span class="font-medium text-ink-2">{{ auth()->user()->role->label() }}</span>.
             Atur waktumu antara tugas dan agenda hari ini.
         </p>
     </div>
@@ -83,8 +83,8 @@
     </h2>
 
     @if ($notifikasi->isEmpty())
-        <div class="flex items-center gap-3 rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800">
-            <x-fa name="circle-check" class="text-emerald-600" />
+        <div class="flex items-center gap-3 rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800 dark:border-emerald-900 dark:bg-emerald-950/60 dark:text-emerald-200">
+            <x-fa name="circle-check" class="text-emerald-600 dark:text-emerald-400" />
             Tidak ada peringatan. Semua tugas dan agendamu masih aman.
         </div>
     @else
@@ -102,11 +102,11 @@
         <h2 class="panel-judul">
             <x-fa name="bullseye" /> Rekomendasi Pengerjaan
         </h2>
-        <span class="text-xs text-gray-400"><x-fa name="arrow-down-wide-short" class="mr-1" />Diurutkan dari tenggat terdekat · tugas didahulukan</span>
+        <span class="text-xs text-ink-4"><x-fa name="arrow-down-wide-short" class="mr-1" />Diurutkan dari tenggat terdekat · tugas didahulukan</span>
     </div>
 
     @if ($rekomendasi->isEmpty())
-        <p class="text-sm text-gray-500"><x-fa name="mug-hot" class="mr-1 text-gray-400" />Belum ada tugas atau agenda aktif. Saatnya beristirahat sebentar.</p>
+        <p class="text-sm text-ink-3"><x-fa name="mug-hot" class="mr-1 text-ink-4" />Belum ada tugas atau agenda aktif. Saatnya beristirahat sebentar.</p>
     @else
         <ol class="space-y-2">
             @foreach ($rekomendasi as $index => $item)
@@ -120,7 +120,7 @@
 <div class="card mb-8 p-3 sm:p-4">
     <div class="flex flex-col gap-3 xl:flex-row xl:items-center">
         <div class="relative flex-1">
-            <x-fa name="magnifying-glass" class="pointer-events-none absolute inset-y-0 left-3 my-auto text-gray-400" />
+            <x-fa name="magnifying-glass" class="pointer-events-none absolute inset-y-0 left-3 my-auto text-ink-4" />
             <input
                 type="search"
                 id="search"
@@ -131,7 +131,7 @@
         </div>
 
         <div class="flex flex-wrap items-center gap-2" id="filter-jenis" role="group" aria-label="Filter jenis">
-            <x-fa name="filter" class="mr-1 text-gray-400" />
+            <x-fa name="filter" class="mr-1 text-ink-4" />
             @foreach (['semua' => 'Semua', 'tugas' => 'Tugas', 'agenda' => 'Agenda'] as $value => $label)
                 <button type="button" data-filter="jenis" data-value="{{ $value }}"
                         class="filter-chip chip"
@@ -142,7 +142,7 @@
         </div>
 
         <div class="flex flex-wrap items-center gap-2" id="filter-status" role="group" aria-label="Filter status">
-            <x-fa name="circle-half-stroke" class="mr-1 text-gray-400" />
+            <x-fa name="circle-half-stroke" class="mr-1 text-ink-4" />
             @foreach (['semua' => 'Semua status', 'aktif' => 'Aktif', 'selesai' => 'Selesai', 'lewat' => 'Lewat waktu'] as $value => $label)
                 <button type="button" data-filter="status" data-value="{{ $value }}"
                         class="filter-chip chip"
@@ -153,7 +153,7 @@
         </div>
 
         <div class="flex flex-wrap items-center gap-2 xl:ml-auto">
-            <label for="sort" class="text-xs text-gray-500"><x-fa name="arrow-down-wide-short" /></label>
+            <label for="sort" class="text-xs text-ink-3"><x-fa name="arrow-down-wide-short" /></label>
             <select id="sort" class="input w-auto cursor-pointer py-1.5 text-xs">
                 <option value="prioritas">Prioritas (urutan asli)</option>
                 <option value="terdekat">Tenggat terdekat</option>
@@ -166,7 +166,7 @@
         </div>
     </div>
 
-    <p class="mt-2 hidden text-xs text-gray-400" id="hasil-pencarian" aria-live="polite"></p>
+    <p class="mt-2 hidden text-xs text-ink-4" id="hasil-pencarian" aria-live="polite"></p>
 </div>
 
 {{-- Kartu tugas & agenda --}}
@@ -176,8 +176,8 @@
     @endforeach
 </div>
 
-<div id="kosong" class="card hidden border-dashed p-8 text-center text-sm text-gray-500">
-    <x-fa name="inbox" class="mr-1 text-gray-400" />Tidak ada tugas atau agenda yang cocok dengan pencarian/filtermu.
+<div id="kosong" class="card hidden border-dashed p-8 text-center text-sm text-ink-3">
+    <x-fa name="inbox" class="mr-1 text-ink-4" />Tidak ada tugas atau agenda yang cocok dengan pencarian/filtermu.
 </div>
 
 @once

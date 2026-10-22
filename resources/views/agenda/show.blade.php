@@ -28,7 +28,7 @@
         <div class="card p-6">
             <dl class="space-y-3 text-sm">
                 <div class="flex gap-3">
-                    <dt class="dt-label"><x-fa name="tag" class="text-gray-400" />Jenis</dt>
+                    <dt class="dt-label"><x-fa name="tag" class="text-ink-4" />Jenis</dt>
                     <dd>
                         <span class="inline-flex items-center gap-1 rounded-md bg-accent-soft px-2 py-0.5 text-xs text-accent">
                             <x-fa name="calendar-day" />{{ $agenda->jenis }}
@@ -36,25 +36,25 @@
                     </dd>
                 </div>
                 <div class="flex gap-3">
-                    <dt class="dt-label"><x-fa name="calendar-days" class="text-gray-400" />Tanggal</dt>
+                    <dt class="dt-label"><x-fa name="calendar-days" class="text-ink-4" />Tanggal</dt>
                     <dd>{{ $agenda->tanggal->isoFormat('D MMM Y') }}</dd>
                 </div>
                 @if ($agenda->waktu)
                     <div class="flex gap-3">
-                        <dt class="dt-label"><x-fa name="clock" class="text-gray-400" />Waktu</dt>
+                        <dt class="dt-label"><x-fa name="clock" class="text-ink-4" />Waktu</dt>
                         <dd>{{ $agenda->waktu }}</dd>
                     </div>
                 @endif
                 @if ($agenda->deskripsi)
                     <div class="flex gap-3">
-                        <dt class="dt-label"><x-fa name="align-left" class="text-gray-400" />Deskripsi</dt>
+                        <dt class="dt-label"><x-fa name="align-left" class="text-ink-4" />Deskripsi</dt>
                         <dd class="whitespace-pre-line">{!! nl2br(e($agenda->deskripsi)) !!}</dd>
                     </div>
                 @endif
             </dl>
 
-            <div class="mt-6 flex items-center gap-2 border-t border-gray-100 pt-4 text-xs text-gray-500">
-                <x-fa name="circle-check" class="text-emerald-500" />
+            <div class="mt-6 flex items-center gap-2 border-t border-line pt-4 text-xs text-ink-3">
+                <x-fa name="circle-check" class="text-emerald-500 dark:text-emerald-400" />
                 Agenda otomatis ditandai selesai setelah waktu pelaksanaan terlampaui.
             </div>
         </div>

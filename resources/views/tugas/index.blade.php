@@ -30,52 +30,52 @@
     </div>
 
     @if ($tugas->isEmpty())
-        <div class="card p-6 text-center text-sm text-gray-500">
-            <x-fa name="inbox" class="mr-1 text-gray-400" />Belum ada tugas.
+        <div class="card p-6 text-center text-sm text-ink-3">
+            <x-fa name="inbox" class="mr-1 text-ink-4" />Belum ada tugas.
         </div>
     @else
         <div class="card overflow-x-auto">
             <table class="w-full text-left text-sm">
-                <thead class="border-b border-gray-200 bg-gray-50/70 text-xs uppercase text-gray-500">
+                <thead class="border-b border-line bg-surface-2/70 text-xs uppercase text-ink-3">
                     <tr>
-                        <th class="px-4 py-3"><x-fa name="font" class="mr-1 text-gray-400" />Judul</th>
-                        <th class="px-4 py-3"><x-fa name="graduation-cap" class="mr-1 text-gray-400" />Mata Kuliah / Dosen</th>
-                        <th class="px-4 py-3"><x-fa name="calendar-days" class="mr-1 text-gray-400" />Tenggat</th>
-                        <th class="px-4 py-3"><x-fa name="users" class="mr-1 text-gray-400" />Selesai</th>
-                        <th class="px-4 py-3"><x-fa name="circle-half-stroke" class="mr-1 text-gray-400" />Status</th>
+                        <th class="px-4 py-3"><x-fa name="font" class="mr-1 text-ink-4" />Judul</th>
+                        <th class="px-4 py-3"><x-fa name="graduation-cap" class="mr-1 text-ink-4" />Mata Kuliah / Dosen</th>
+                        <th class="px-4 py-3"><x-fa name="calendar-days" class="mr-1 text-ink-4" />Tenggat</th>
+                        <th class="px-4 py-3"><x-fa name="users" class="mr-1 text-ink-4" />Selesai</th>
+                        <th class="px-4 py-3"><x-fa name="circle-half-stroke" class="mr-1 text-ink-4" />Status</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-100">
+                <tbody class="divide-y divide-line">
                     @foreach ($tugas as $item)
-                        <tr class="transition hover:bg-gray-50">
+                        <tr class="transition hover:bg-surface-2">
                             <td class="px-4 py-3">
                                 <a href="{{ route('tugas.show', $item) }}" class="font-medium text-accent hover:underline">
-                                    <x-fa name="list-check" class="mr-1.5 text-gray-400" />{{ $item->judul }}
+                                    <x-fa name="list-check" class="mr-1.5 text-ink-4" />{{ $item->judul }}
                                 </a>
-                                <p class="mt-0.5 text-xs text-gray-500"><x-fa name="user" class="mr-1" />Oleh {{ $item->user->name }}</p>
+                                <p class="mt-0.5 text-xs text-ink-3"><x-fa name="user" class="mr-1" />Oleh {{ $item->user->name }}</p>
                             </td>
-                            <td class="px-4 py-3 text-gray-600">
+                            <td class="px-4 py-3 text-ink-2">
                                 {{ $item->mata_kuliah ?? '-' }}{{ $item->dosen ? ' · '.$item->dosen : '' }}
                             </td>
                             <td class="px-4 py-3">
                                 @if ($item->tenggat)
-                                    <span class="{{ $item->isTenggatLewat() ? 'text-red-600' : 'text-gray-600' }}">
+                                    <span class="{{ $item->isTenggatLewat() ? 'text-red-600 dark:text-red-400' : 'text-ink-2' }}">
                                         <x-fa name="calendar-day" class="mr-1" />{{ $item->tenggat->isoFormat('D MMM Y') }}
                                     </span>
                                 @else
-                                    <span class="text-gray-400">-</span>
+                                    <span class="text-ink-4">-</span>
                                 @endif
                             </td>
-                            <td class="px-4 py-3 text-gray-600">
-                                <x-fa name="users" class="mr-1 text-gray-400" />{{ $item->diselesaikan_oleh_count }} mahasiswa
+                            <td class="px-4 py-3 text-ink-2">
+                                <x-fa name="users" class="mr-1 text-ink-4" />{{ $item->diselesaikan_oleh_count }} mahasiswa
                             </td>
                             <td class="px-4 py-3">
                                 @if (in_array($item->id, $tugasSelesaiIds))
-                                    <span class="inline-flex items-center gap-1 rounded-md bg-emerald-100 px-2 py-0.5 text-xs font-medium text-emerald-700">
+                                    <span class="inline-flex items-center gap-1 rounded-md bg-emerald-100 px-2 py-0.5 text-xs font-medium text-emerald-700 dark:bg-emerald-900/60 dark:text-emerald-300">
                                         <x-fa name="circle-check" />Selesai
                                     </span>
                                 @else
-                                    <span class="inline-flex items-center gap-1 rounded-md bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-600">
+                                    <span class="inline-flex items-center gap-1 rounded-md bg-black/5 px-2 py-0.5 text-xs font-medium text-ink-2 dark:bg-white/10">
                                         <x-fa name="hourglass-half" />Belum
                                     </span>
                                 @endif

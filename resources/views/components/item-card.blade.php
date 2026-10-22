@@ -6,14 +6,14 @@
         && $status !== \App\Support\ActivityItem::STATUS_SELESAI;
 
     $batasWarna = match (true) {
-        $status === \App\Support\ActivityItem::STATUS_LEWAT => 'border-red-300',
-        $mendekati => 'border-amber-300',
+        $status === \App\Support\ActivityItem::STATUS_LEWAT => 'border-red-300 dark:border-red-700',
+        $mendekati => 'border-amber-300 dark:border-amber-700',
         default => 'border-cardline',
     };
 
     $waktuWarna = match (true) {
-        $status === \App\Support\ActivityItem::STATUS_SELESAI => 'text-emerald-600',
-        ($item->sisaDetik() ?? 1) < 0 => 'text-red-600',
+        $status === \App\Support\ActivityItem::STATUS_SELESAI => 'text-emerald-600 dark:text-emerald-400',
+        ($item->sisaDetik() ?? 1) < 0 => 'text-red-600 dark:text-red-400',
         default => 'text-accent',
     };
 @endphp
@@ -39,16 +39,16 @@
     </div>
 
     <a href="{{ $item->isTugas() ? route('tugas.show', $item->model) : route('agenda.show', $item->model) }}"
-       class="text-sm font-semibold text-gray-900 hover:text-accent">
-        <x-fa :name="$item->isTugas() ? 'list-check' : 'calendar-days'" class="mr-1.5 text-gray-400" />{{ $item->judul() }}
+       class="text-sm font-semibold text-ink hover:text-accent">
+        <x-fa :name="$item->isTugas() ? 'list-check' : 'calendar-days'" class="mr-1.5 text-ink-4" />{{ $item->judul() }}
     </a>
 
-    <p class="mt-1 flex-1 text-xs text-gray-500">
+    <p class="mt-1 flex-1 text-xs text-ink-3">
         {{ $item->subjudul() }}
     </p>
 
-    <div class="mt-3 flex items-center justify-between border-t border-gray-100 pt-3 text-xs">
-        <span class="text-gray-500">
+    <div class="mt-3 flex items-center justify-between border-t border-line pt-3 text-xs">
+        <span class="text-ink-3">
             <x-fa name="calendar-days" class="mr-1" />{{ $item->waktuLabel() }}
         </span>
 

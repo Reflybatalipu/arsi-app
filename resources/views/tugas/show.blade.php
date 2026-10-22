@@ -32,33 +32,33 @@
         <div class="card p-6">
             <dl class="space-y-3 text-sm">
                 <div class="flex gap-3">
-                    <dt class="dt-label"><x-fa name="graduation-cap" class="text-gray-400" />Mata Kuliah</dt>
+                    <dt class="dt-label"><x-fa name="graduation-cap" class="text-ink-4" />Mata Kuliah</dt>
                     <dd>{{ $tugas->mata_kuliah ?? '-' }}</dd>
                 </div>
                 <div class="flex gap-3">
-                    <dt class="dt-label"><x-fa name="user-tie" class="text-gray-400" />Dosen</dt>
+                    <dt class="dt-label"><x-fa name="user-tie" class="text-ink-4" />Dosen</dt>
                     <dd>{{ $tugas->dosen ?? '-' }}</dd>
                 </div>
                 <div class="flex gap-3">
-                    <dt class="dt-label"><x-fa name="calendar-days" class="text-gray-400" />Tenggat</dt>
-                    <dd class="{{ $tugas->isTenggatLewat() ? 'text-red-600' : '' }}">
+                    <dt class="dt-label"><x-fa name="calendar-days" class="text-ink-4" />Tenggat</dt>
+                    <dd class="{{ $tugas->isTenggatLewat() ? 'text-red-600 dark:text-red-400' : '' }}">
                         {{ $tugas->tenggat?->isoFormat('D MMM Y') ?? 'Tanpa tenggat' }}
                     </dd>
                 </div>
                 <div class="flex gap-3">
-                    <dt class="dt-label"><x-fa name="user-pen" class="text-gray-400" />Diinput oleh</dt>
+                    <dt class="dt-label"><x-fa name="user-pen" class="text-ink-4" />Diinput oleh</dt>
                     <dd>{{ $tugas->user->name }}</dd>
                 </div>
                 @if ($tugas->deskripsi)
                     <div class="flex gap-3">
-                        <dt class="dt-label"><x-fa name="align-left" class="text-gray-400" />Deskripsi</dt>
+                        <dt class="dt-label"><x-fa name="align-left" class="text-ink-4" />Deskripsi</dt>
                         <dd class="whitespace-pre-line">{!! nl2br(e($tugas->deskripsi)) !!}</dd>
                     </div>
                 @endif
             </dl>
 
             {{-- Tandai selesai --}}
-            <div class="mt-6 border-t border-gray-100 pt-4">
+            <div class="mt-6 border-t border-line pt-4">
                 <form method="POST" action="{{ route('tugas.selesai', $tugas) }}">
                     @csrf
                     <button type="submit" class="btn {{ $sudahSelesai ? 'btn-secondary' : 'btn-success' }}">
@@ -69,17 +69,17 @@
             </div>
 
             {{-- Progres mahasiswa --}}
-            <div class="mt-6 border-t border-gray-100 pt-4">
+            <div class="mt-6 border-t border-line pt-4">
                 <h2 class="mb-2 flex items-center gap-2 text-sm font-semibold">
-                    <x-fa name="users" class="text-gray-400" />Diselesaikan {{ $tugas->diselesaikan_oleh_count }} mahasiswa
+                    <x-fa name="users" class="text-ink-4" />Diselesaikan {{ $tugas->diselesaikan_oleh_count }} mahasiswa
                 </h2>
 
                 @if ($penyelesai->isEmpty())
-                    <p class="text-sm text-gray-500"><x-fa name="inbox" class="mr-1 text-gray-400" />Belum ada yang menyelesaikan.</p>
+                    <p class="text-sm text-ink-3"><x-fa name="inbox" class="mr-1 text-ink-4" />Belum ada yang menyelesaikan.</p>
                 @else
                     <ul class="flex flex-wrap gap-2">
                         @foreach ($penyelesai as $mahasiswa)
-                            <li class="inline-flex items-center gap-1 rounded-md bg-emerald-50 px-2 py-0.5 text-xs text-emerald-700">
+                            <li class="inline-flex items-center gap-1 rounded-md bg-emerald-50 px-2 py-0.5 text-xs text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300">
                                 <x-fa name="user-graduate" />{{ $mahasiswa->name }}
                             </li>
                         @endforeach

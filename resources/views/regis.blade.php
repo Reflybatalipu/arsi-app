@@ -11,7 +11,7 @@
                 </span>
                 <div>
                     <h1 class="text-lg font-semibold">Registrasi Akun</h1>
-                    <p class="text-xs text-gray-500">Buat akun untuk mulai mengatur tugas dan agenda.</p>
+                    <p class="text-xs text-ink-3">Buat akun untuk mulai mengatur tugas dan agenda.</p>
                 </div>
             </div>
 
@@ -19,19 +19,19 @@
                 @csrf
 
                 <div>
-                    <label for="name" class="label"><x-fa name="user" class="text-gray-400" />Nama Lengkap</label>
+                    <label for="name" class="label"><x-fa name="user" class="text-ink-4" />Nama Lengkap</label>
                     <input type="text" name="name" id="name" value="{{ old('name') }}" required
                            class="input">
                 </div>
 
                 <div>
-                    <label for="email" class="label"><x-fa name="envelope" class="text-gray-400" />Email</label>
+                    <label for="email" class="label"><x-fa name="envelope" class="text-ink-4" />Email</label>
                     <input type="email" name="email" id="email" value="{{ old('email') }}" required
                            class="input">
                 </div>
 
                 <div>
-                    <label for="role" class="label"><x-fa name="shield-halved" class="text-gray-400" />Peran</label>
+                    <label for="role" class="label"><x-fa name="shield-halved" class="text-ink-4" />Peran</label>
                     <select name="role" id="role" required class="input cursor-pointer">
                         <option value="mahasiswa" @selected(old('role') === 'mahasiswa')>Mahasiswa</option>
                         <option value="ketua_tingkat" @selected(old('role') === 'ketua_tingkat')>Ketua Tingkat</option>
@@ -39,13 +39,13 @@
                 </div>
 
                 <div>
-                    <label for="password" class="label"><x-fa name="lock" class="text-gray-400" />Password</label>
+                    <label for="password" class="label"><x-fa name="lock" class="text-ink-4" />Password</label>
                     <input type="password" name="password" id="password" required
                            class="input">
                 </div>
 
                 <div>
-                    <label for="password_confirmation" class="label"><x-fa name="lock" class="text-gray-400" />Konfirmasi Password</label>
+                    <label for="password_confirmation" class="label"><x-fa name="lock" class="text-ink-4" />Konfirmasi Password</label>
                     <input type="password" name="password_confirmation" id="password_confirmation" required
                            class="input">
                 </div>
@@ -55,7 +55,7 @@
                 </button>
             </form>
 
-            <p class="mt-4 border-t border-gray-100 pt-4 text-center text-sm text-gray-600">
+            <p class="mt-4 border-t border-line pt-4 text-center text-sm text-ink-2">
                 Sudah punya akun?
                 <a href="{{ route('login') }}" class="font-medium text-accent hover:underline">Masuk</a>
             </p>

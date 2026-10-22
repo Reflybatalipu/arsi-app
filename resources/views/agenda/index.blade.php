@@ -12,23 +12,23 @@
     </div>
 
     @if ($agendas->isEmpty())
-        <div class="card p-6 text-center text-sm text-gray-500">
-            <x-fa name="inbox" class="mr-1 text-gray-400" />Belum ada agenda. Klik "Tambah Agenda" untuk membuat.
+        <div class="card p-6 text-center text-sm text-ink-3">
+            <x-fa name="inbox" class="mr-1 text-ink-4" />Belum ada agenda. Klik "Tambah Agenda" untuk membuat.
         </div>
     @else
         <div class="space-y-3">
             @foreach ($agendas as $agenda)
                 <a href="{{ route('agenda.show', $agenda) }}"
-                   class="card flex items-center justify-between gap-4 p-4 transition hover:bg-gray-50">
+                   class="card flex items-center justify-between gap-4 p-4 transition hover:bg-surface-2">
                     <div class="min-w-0">
                         <p class="flex items-center gap-2 font-medium">
                             <x-fa name="calendar-day" class="text-indigo-400" />{{ $agenda->judul }}
                         </p>
-                        <p class="mt-0.5 text-xs text-gray-500">{{ $agenda->deskripsi }}</p>
+                        <p class="mt-0.5 text-xs text-ink-3">{{ $agenda->deskripsi }}</p>
                     </div>
                     <div class="shrink-0 text-right text-sm">
                         @if ($agenda->waktuMulai()->isPast())
-                            <span class="mb-1 inline-flex items-center gap-1 rounded-md bg-emerald-100 px-2 py-0.5 text-xs font-medium text-emerald-700">
+                            <span class="mb-1 inline-flex items-center gap-1 rounded-md bg-emerald-100 px-2 py-0.5 text-xs font-medium text-emerald-700 dark:bg-emerald-900/60 dark:text-emerald-300">
                                 <x-fa name="circle-check" />Selesai
                             </span>
                         @else
@@ -36,10 +36,10 @@
                                 <x-fa name="clock" />Akan datang
                             </span>
                         @endif
-                        <p class="mt-1 text-xs text-gray-600">
+                        <p class="mt-1 text-xs text-ink-2">
                             <x-fa name="calendar-days" class="mr-1" />{{ $agenda->tanggal->isoFormat('D MMM Y') }}{{ $agenda->waktu ? ' · '.$agenda->waktu : '' }}
                         </p>
-                        <span class="inline-flex items-center gap-1 rounded-md bg-gray-100 px-2 py-0.5 text-xs text-gray-600">
+                        <span class="inline-flex items-center gap-1 rounded-md bg-black/5 px-2 py-0.5 text-xs text-ink-2 dark:bg-white/10">
                             <x-fa name="tag" />{{ $agenda->jenis }}
                         </span>
                     </div>

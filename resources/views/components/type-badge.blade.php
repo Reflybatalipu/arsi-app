@@ -5,7 +5,7 @@
     $label = $tugas ? 'Tugas' : 'Agenda';
     $warna = $tugas
         ? 'bg-accent-soft text-accent'
-        : 'bg-indigo-500/10 text-indigo-600';
+        : 'bg-indigo-500/10 text-indigo-600 dark:bg-indigo-400/15 dark:text-indigo-300';
     $ikon = $tugas ? 'list-check' : 'calendar-days';
 @endphp
 
